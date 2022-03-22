@@ -8,7 +8,6 @@ import rootReducer from './slices'
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/argon-dashboard-react.scss";
 
-
 const localStorageMiddleware = ({ getState }) => {
   return next => action => {
     const blacklist = ["account", "client", "creditCard", "login", "profile", "provider", "sidebar", "transferDestination", "transference"]
