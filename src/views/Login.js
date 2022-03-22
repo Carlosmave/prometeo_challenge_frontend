@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Col, Form, FormGroup } from "reactstrap";
 import { useDispatch, useSelector } from 'react-redux'
-import { loginSelector, setFormData, submitLoginForm, fetchProviders } from 'slices/login'
+import { loginSelector, setFormData, submitLoginForm, fetchProviders, setInitialData } from 'slices/login'
 import Dropdown from "components/FormElements/Dropdown.js"
 import InputField from "components/FormElements/InputField.js"
 import { useForm } from "react-hook-form";
@@ -10,14 +10,16 @@ import { Button, Card, CardBody } from "reactstrap";
 import LoadingSpinner from "components/LoadingSpinners/LoadingSpinner.js";
 
 const Login = () => {
-  const { formData, providers, loading } = useSelector(loginSelector)
+  const { formData, providers, types, loading } = useSelector(loginSelector)
   const dispatch = useDispatch()
   let history = useHistory();
-  const { handleSubmit, errors, control } = useForm({defaultValues: formData});
+  const { handleSubmit, errors, control, reset } = useForm({defaultValues: formData});
   const onSubmit = data => {
     dispatch(submitLoginForm(data, history))
   };
   useEffect(() => {
+    dispatch(setInitialData())
+    reset({});
     dispatch(fetchProviders())
   }, [dispatch]);
   const renderItems = () => {
@@ -43,9 +45,8 @@ const Login = () => {
             options={providers} disabled={false} errors={errors} errorMessage="⚠ Debe seleccionar un proveedor" label="name" value="code" />
           </FormGroup>
           <FormGroup>
-            <InputField name="type" control={control} required={false} dispatchFunction={setFormData} type="text"
-            placeholder="Tipo" disabled={false} errors={errors}
-            errorMessage="⚠ Debe ingresar el tipo" />
+            <Dropdown name="type" control={control} required={false} dispatchFunction={setFormData} placeholder="Seleccione un tipo (opcional)"
+            options={types} disabled={false} errors={errors} errorMessage="⚠ Debe seleccionar un tipo" label="name" value="code" />
           </FormGroup>
           <div className="text-center">
             <Button className="my-4 bg-danger" type="submit" style={{color:"white"}}>

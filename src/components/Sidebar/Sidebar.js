@@ -41,7 +41,7 @@ const Sidebar = ( {routes, logo} ) => {
             <DropdownToggle nav>
               <Media className="align-items-center">
                 <span className="avatar avatar-sm rounded-circle">
-                  <img alt="..." src={require("assets/img/user-default.jpg").default}/>
+                  <img alt="..." src={require("assets/img/user-default.jpg")}/>
                 </span>
               </Media>
             </DropdownToggle>

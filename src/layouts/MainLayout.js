@@ -25,7 +25,7 @@ const MainLayout = ({ location }) =>{
   }
   return (
     <>
-      <Sidebar routes={sidebarRoutes} logo={{ innerLink: "/main/home", imgSrc: require("assets/img/prometeo_logo.png").default,
+      <Sidebar routes={sidebarRoutes} logo={{ innerLink: "/main/home", imgSrc: require("assets/img/prometeo_logo.png"),
       imgAlt: "prometeo_logo" }} />
       <div className="main-content bg-danger" style={{minHeight:"100vh"}}>
         <MainNavbar/>

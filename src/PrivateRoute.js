@@ -1,9 +1,9 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 
-const DataRoute = ({path, component}) => {
+const PrivateRoute = ({path, component}) => {
   return (
-      localStorage.getItem('userName') !== null ? (
+      localStorage.getItem('sessionKeyAuth') !== null ? (
         <Route path={path} component={component}  />
       ) : (
         <Redirect to={{ pathname: '/auth' }} />
@@ -11,4 +11,4 @@ const DataRoute = ({path, component}) => {
   )
 }
 
-export default DataRoute
+export default PrivateRoute

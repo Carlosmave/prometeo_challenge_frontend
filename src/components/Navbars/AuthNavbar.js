@@ -8,7 +8,7 @@ const AdminNavbar = () => {
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
         <Container className="px-4">
           <NavbarBrand to="/" tag={Link}>
-            <img alt="prometeo_logo" src={require("assets/img/prometeo_logo.png").default} />
+            <img alt="prometeo_logo" src={require("assets/img/prometeo_logo.png")} />
           </NavbarBrand>
         </Container>
       </Navbar>
