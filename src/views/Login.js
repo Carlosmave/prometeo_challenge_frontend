@@ -21,10 +21,11 @@ const Login = () => {
     dispatch(setInitialData())
     reset({});
     dispatch(fetchProviders())
-  }, [dispatch]);
+  }, [dispatch, reset]);
 
   useEffect(() => {
     setValue('type', formData.type, { shouldValidate: false })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.provider]);
 
   const renderItems = () => {
