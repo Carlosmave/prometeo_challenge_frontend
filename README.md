@@ -17,7 +17,6 @@ Required env vars:
 
 - REACT_APP_PROMETEO_CHALLENGE_BACKEND_API_URI: The URI for the BACKEND API
 
-
 ## Available Scripts
 
 ### `yarn start`
