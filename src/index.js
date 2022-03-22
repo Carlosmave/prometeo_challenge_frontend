@@ -11,7 +11,7 @@ import "assets/scss/argon-dashboard-react.scss";
 
 const localStorageMiddleware = ({ getState }) => {
   return next => action => {
-    const blacklist = ["loginForm"]
+    const blacklist = ["account", "client", "creditCard", "login", "profile", "provider", "sidebar", "transferDestination", "transference"]
     const result = next(action);
     const _ = require('lodash');
     const actualState = _.cloneDeep(getState());

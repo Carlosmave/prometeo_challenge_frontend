@@ -19,8 +19,8 @@ const Dropdown = (formProps) => {
              dispatch(formProps.dispatchFunction({key:props.name, value:e}));
            }}
            isClearable={true}
-           getOptionLabel ={(option)=>option.name}
-           getOptionValue ={(option)=>option.code}
+           getOptionLabel ={(option) => option[formProps.label]}
+           getOptionValue ={(option) => option[formProps.value]}
            placeholder={formProps.placeholder}
            theme={theme => ({
              ...theme,

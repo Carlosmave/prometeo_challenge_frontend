@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Col, Form, FormGroup } from "reactstrap";
 import { useDispatch, useSelector } from 'react-redux'
-import { loginFormSelector, setFormData, submitLoginForm, fetchProviders } from 'slices/loginForm'
+import { loginSelector, setFormData, submitLoginForm, fetchProviders } from 'slices/login'
 import Dropdown from "components/FormElements/Dropdown.js"
 import InputField from "components/FormElements/InputField.js"
 import { useForm } from "react-hook-form";
@@ -10,7 +10,7 @@ import { Button, Card, CardBody } from "reactstrap";
 import LoadingSpinner from "components/LoadingSpinners/LoadingSpinner.js";
 
 const Login = () => {
-  const { formData, providers, loading } = useSelector(loginFormSelector)
+  const { formData, providers, loading } = useSelector(loginSelector)
   const dispatch = useDispatch()
   let history = useHistory();
   const { handleSubmit, errors, control } = useForm({defaultValues: formData});
@@ -20,7 +20,6 @@ const Login = () => {
   useEffect(() => {
     dispatch(fetchProviders())
   }, [dispatch]);
-
   const renderItems = () => {
     if (loading) return (<LoadingSpinner loadingText={"Cargando"}/>)
     return (
@@ -41,7 +40,7 @@ const Login = () => {
           </FormGroup>
           <FormGroup>
             <Dropdown name="provider" control={control} required={true} dispatchFunction={setFormData} placeholder="Seleccione un proveedor"
-            options={providers} disabled={false} errors={errors} errorMessage="⚠ Debe seleccionar un proveedor"/>
+            options={providers} disabled={false} errors={errors} errorMessage="⚠ Debe seleccionar un proveedor" label="name" value="code" />
           </FormGroup>
           <FormGroup>
             <InputField name="type" control={control} required={false} dispatchFunction={setFormData} type="text"
@@ -57,8 +56,6 @@ const Login = () => {
       </>
     )
   }
-
-
   return (
     <>
       <Col lg="5" md="7">
@@ -69,7 +66,7 @@ const Login = () => {
         </Card>
       </Col>
     </>
-      );
-  }
+    );
+}
 
-  export default Login;
+export default Login;

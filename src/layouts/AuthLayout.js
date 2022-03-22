@@ -5,7 +5,7 @@ import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import MainFooter from "components/Footers/MainFooter.js";
 import routes from "routes.js";
 
-const Auth = () => {
+const AuthLayout = () => {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/auth") {
@@ -21,8 +21,6 @@ const Auth = () => {
       }
     });
   }
-
-
   return (
     <>
       <div className="main-content bg-danger" style={{minHeight:"100vh"}}>
@@ -54,4 +52,4 @@ const Auth = () => {
   );
 }
 
-export default Auth;
+export default AuthLayout;
