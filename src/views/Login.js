@@ -10,10 +10,10 @@ import { Button, Card, CardBody } from "reactstrap";
 import LoadingSpinner from "components/LoadingSpinners/LoadingSpinner.js";
 
 const Login = () => {
-  const { formData, providers, types, loading } = useSelector(loginSelector)
+  const { formData, providers, types, loading, typeDropdownDisabled } = useSelector(loginSelector)
   const dispatch = useDispatch()
   let history = useHistory();
-  const { handleSubmit, errors, control, reset } = useForm({defaultValues: formData});
+  const { handleSubmit, errors, control, reset, setValue } = useForm({defaultValues: formData});
   const onSubmit = data => {
     dispatch(submitLoginForm(data, history))
   };
@@ -22,6 +22,11 @@ const Login = () => {
     reset({});
     dispatch(fetchProviders())
   }, [dispatch]);
+
+  useEffect(() => {
+    setValue('type', formData.type, { shouldValidate: false })
+  }, [formData.provider]);
+
   const renderItems = () => {
     if (loading) return (<LoadingSpinner loadingText={"Cargando"}/>)
     return (
@@ -46,7 +51,7 @@ const Login = () => {
           </FormGroup>
           <FormGroup>
             <Dropdown name="type" control={control} required={false} dispatchFunction={setFormData} placeholder="Seleccione un tipo (opcional)"
-            options={types} disabled={false} errors={errors} errorMessage="⚠ Debe seleccionar un tipo" label="name" value="code" />
+            options={types} disabled={typeDropdownDisabled} errors={errors} errorMessage="⚠ Debe seleccionar un tipo" label="name" value="code" />
           </FormGroup>
           <div className="text-center">
             <Button className="my-4 bg-danger" type="submit" style={{color:"white"}}>

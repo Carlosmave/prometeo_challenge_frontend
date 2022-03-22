@@ -28,7 +28,8 @@ export const initialState = {
           {name: "RTN", code: "rtn"},
           {name: "Sociedad Extranjera sin NIT en Colombia", code: "sociedad_extranjera_sin_nit"},
           {name: "Tarjeta de Identidad", code: "tarjeta_identidad"},
-          {name: "Trj. Seguro Social Extranjero", code: "tarjeta_seguro_social_extranjero"}]
+          {name: "Trj. Seguro Social Extranjero", code: "tarjeta_seguro_social_extranjero"}],
+  typeDropdownDisabled: true,
 }
 
 const loginSlice = createSlice({
@@ -40,6 +41,14 @@ const loginSlice = createSlice({
         state.formData[payload.key] = payload.value
       } else {
         state.formData[payload.key] = ""
+      }
+      if (payload.key === "provider") {
+        if (payload.value !== null && payload.value.code === "davivienda") {
+          state.typeDropdownDisabled = false
+        } else {
+          state.typeDropdownDisabled = true
+          state.formData["type"] = ""
+        }
       }
     },
     setInitialData: state => {
